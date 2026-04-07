@@ -1,0 +1,19 @@
+{
+  "expo": {
+    "name": "TimeVault",
+    "slug": "timevault",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "platforms": ["android"],
+    "userInterfaceStyle": "automatic",
+    "assetBundlePatterns": ["**/*"],
+    "android": {
+      "package": "com.timevault.app",
+      "minSdkVersion": 26,
+      "targetSdkVersion": 35,
+      "adaptiveIcon": {
+        "backgroundColor": "#F4F7FF"
+      }
+    }
+  }
+}
