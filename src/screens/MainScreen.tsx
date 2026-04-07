@@ -9,6 +9,9 @@ interface MainScreenProps {
 
 export function MainScreen({ profile }: MainScreenProps) {
   const greeting = profile?.name?.trim() ? `Hallo ${profile.name.trim()}!` : 'Hallo!';
+  const modeHint = profile?.workSettingsSkipped
+    ? 'Flexibler Modus ist aktiv – Tracking funktioniert ohne feste Arbeitszeiten.'
+    : 'Deine Standard-Arbeitszeit ist gespeichert und kann jederzeit angepasst werden.';
 
   return (
     <View style={styles.container}>
@@ -17,6 +20,7 @@ export function MainScreen({ profile }: MainScreenProps) {
       <Text style={styles.body}>
         Als nächstes kannst du Zeiterfassung, Live-Verdienstanzeige und Berichte ergänzen.
       </Text>
+      <Text style={styles.meta}>{modeHint}</Text>
     </View>
   );
 }
@@ -44,5 +48,12 @@ const styles = StyleSheet.create({
     color: colors.subText,
     fontSize: 15,
     lineHeight: 24
+  },
+  meta: {
+    marginTop: 12,
+    color: colors.text,
+    fontSize: 13,
+    lineHeight: 20,
+    fontWeight: '600'
   }
 });

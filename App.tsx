@@ -2,13 +2,14 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { ActivityIndicator, StyleSheet, View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { MainScreen } from './src/screens/MainScreen';
+import { IntroScreen } from './src/screens/IntroScreen';
 import { OnboardingScreen } from './src/screens/OnboardingScreen';
 import { WelcomeScreen } from './src/screens/WelcomeScreen';
 import { onboardingStorage } from './src/storage/onboardingStorage';
 import { colors } from './src/theme/colors';
 import { OnboardingData } from './src/types/onboarding';
 
-type AppFlow = 'loading' | 'welcome' | 'onboarding' | 'main';
+type AppFlow = 'loading' | 'intro' | 'welcome' | 'onboarding' | 'main';
 
 const defaultOnboardingData: OnboardingData = {
   name: '',
@@ -18,6 +19,7 @@ const defaultOnboardingData: OnboardingData = {
   defaultHoursPerDay: '8',
   breakMinutes: '30',
   autoSubtractBreaks: true,
+  workSettingsSkipped: false,
   compensationMode: 'hourly'
 };
 
@@ -31,7 +33,7 @@ export default function App() {
       const completed = await onboardingStorage.getCompleted();
 
       if (!completed) {
-        setFlow('welcome');
+        setFlow('intro');
         return;
       }
 
@@ -65,6 +67,7 @@ export default function App() {
 
   return (
     <>
+      {flow === 'intro' ? <IntroScreen onDone={() => setFlow('welcome')} /> : null}
       {flow === 'welcome' ? <WelcomeScreen onStart={() => setFlow('onboarding')} /> : null}
       {flow === 'onboarding' ? (
         <OnboardingScreen initialData={onboardingInitialData} onFinish={handleFinishOnboarding} />

@@ -10,5 +10,6 @@ export interface OnboardingData {
   defaultHoursPerDay: string;
   breakMinutes: string;
   autoSubtractBreaks: boolean;
+  workSettingsSkipped: boolean;
   compensationMode: CompensationMode;
 }
